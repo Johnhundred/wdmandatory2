@@ -37,8 +37,8 @@
 
 	<script src="swal/sweetalert.min.js"></script>
 
+    <script src="js/global.js"></script>
 	<script src="js/main.js"></script>
-
 
 
   </body>
