@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    if( isset( $_POST['login'] ) ){
+        $sPass = base64_encode(base64_encode($_POST['txtUserPassword']));
+        $_SESSION['login'] = "true";
+        $_SESSION['email'] = $_POST['txtUserEmail'];
+        $_SESSION['password'] = $sPass;
+        header('location: admin.php');
+    }
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -28,7 +40,14 @@
   </head>
   <body>
 
-
+    <div id="wdw-login">
+        <form method="post" action="index.php">
+            <input type="text" name="txtUserEmail" placeholder="email">
+            <input type="text" name="txtUserPassword" placeholder="password">
+            <input type="hidden" name="login" value="true">
+			<button>LOGIN</button>
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

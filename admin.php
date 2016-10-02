@@ -1,3 +1,39 @@
+<?php
+	session_start();
+
+	if( isset( $_SESSION['login'] ) ){
+        //compare login-info to json file info
+        //store login-info in variables
+        //get info from json file, store in variables
+        //if variables are the same, logged in
+        //if not, send back to index
+
+	    $sUserPass = base64_decode($_SESSION['password']);
+	    $sUserEmail = $_SESSION['email'];
+	    $sAdminData = file_get_contents("json/administrators.json");
+	    $ajAdminData = json_decode($sAdminData);
+	    //print_r($ajAdminData);
+
+	    $iArrayLength = count($ajAdminData);
+	    for($i = 0; $i < $iArrayLength; $i++){
+	        if($ajAdminData[$i]->password == $sUserPass && $ajAdminData[$i]->email == $sUserEmail){
+	            $_SESSION['admin'] = 1;
+	            break;
+	        } else {
+	            $_SESSION['admin'] = 0;
+	            unset($_SESSION['login']);
+	            header('location: index.php');
+	        }
+	    }
+	} else {
+	    header('location: index.php');
+	}
+
+	if( isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,6 +64,40 @@
     </head>
     <body>
 
+        <p>Admin page.</p>
+
+        <form action="server/logout.php">
+            <button>LOGOUT</button>
+        </form>
+
+        <?php
+
+//            $aAdministrators = [];
+//
+//            $oAdmin = new stdClass();
+//            $oAdmin->email = "a@a.com";
+//            $oAdmin->name = "Admin1";
+//            $oAdmin->password = base64_encode("test1");
+//            $oAdmin->id = uniqid();
+//
+//            array_push($aAdministrators, $oAdmin);
+//
+//            $oAdmin = new stdClass();
+//            $oAdmin->email = "b@b.com";
+//            $oAdmin->name = "Admin2";
+//            $oAdmin->password = base64_encode("test2");
+//            $oAdmin->id = uniqid();
+//
+//            array_push($aAdministrators, $oAdmin);
+//
+//            $output = json_encode($aAdministrators, JSON_PRETTY_PRINT);
+//
+//            file_put_contents("json/administrators.json", $output);
+
+
+
+        ?>
+
 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -42,3 +112,7 @@
 
     </body>
 </html>
+
+<?php
+}
+?>
