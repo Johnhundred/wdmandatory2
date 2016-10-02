@@ -4,7 +4,21 @@
 
 /********************* USER STYLING *********************/
 
+.fa-arrow-up {
+    color: green;
+}
 
+.fa-arrow-down {
+    color: red;
+}
+
+.positive {
+    background-color: #A5DC86;
+}
+
+.negative {
+    background-color: #F27474;
+}
 
 /********************* ADMIN STYLING *********************/
 

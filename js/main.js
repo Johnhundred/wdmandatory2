@@ -1,49 +1,103 @@
 /********************* USER EVENTS *********************/
 
+insertProductDataInUserTemplate();
+
 
 
 /********************* USER FUNCTIONALITY *********************/
 
 //setInterval - checkForProductDataChanges()
+setInterval(function(){
+    checkForProductDataChanges();
+}, 1000);
 
-//Get data from global - getProductDataFromFile()
-//Get HTML user (public) template
-//Insert data into template
-//Add each modified template to a string
-//Pass string to updateAllUserProductDisplay()
 function insertProductDataInUserTemplate(){
+    var sOutput = "";
 
+    $.ajax({
+        "url":"server/populateusertemplate.php",
+        "method":"post",
+        "cache":false
+    }).done( function(sData){
+        updateAllUserProductDisplay(sData);
+    })
 }
 
-//Run every second
-//Call global - getProductDataFromFile()
-//Check data vs. displayed data by id
-//If there are differences, update display with updateSingleUserProductDisplay()
-//If product id cannot be found, add data with addSingleUserProductDisplay()
 function checkForProductDataChanges(){
+    $.ajax({
+        "url":"server/getdata.php",
+        "method":"post",
+        "cache":false
+    }).done( function(sData){
+        var ajData = JSON.parse(sData);
+        for(var i = 0; i < ajData.length; i++){
+            var sId = ajData[i].id;
+            var currentElement, currentTitle, currentDescription, currentImgSrc, currentPrice;
+            if($("#wdw-display").children('div[data-stockId="'+sId+'"]').length > 0){
+                currentElement = $("#wdw-display").children('div[data-stockId="'+sId+'"]').children(".thumbnail");
+                currentTitle = currentElement.children(".caption").children("h3").text();
+                currentDescription = currentElement.children(".caption").children(".description").text();
+                currentPrice = currentElement.children(".caption").children(".price").text();
+                currentImgSrc = currentElement.children("img").attr("src");
+            } else {
+                addSingleUserProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].imgSrc, ajData[i].price);
+            }
 
+            if(currentTitle != ajData[i].title){
+                updateSingleUserProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].imgSrc, ajData[i].price);
+                continue;
+            }
+            if(currentDescription != ajData[i].description){
+                updateSingleUserProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].imgSrc, ajData[i].price);
+                continue;
+            }
+            if(currentPrice != ajData[i].price){
+                updateSingleUserProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].imgSrc, ajData[i].price);
+                continue;
+            }
+            if(currentImgSrc != ajData[i].imgSrc){
+                updateSingleUserProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].imgSrc, ajData[i].price);
+                continue;
+            }
+        }
+    })
 }
 
-//Empty display div, insert passed string instead
-function updateAllUserProductDisplay(){
-
+function updateAllUserProductDisplay(sData){
+    $("#wdw-display").empty().html(sData);
 }
 
-//Take id & variables to be changed as parameters
-//If a parameter is not specified, use current
-//Find single display by id
-//modify values to received parameters
-//if price is different, compare old & new price
-//add up/down green/red arrow & bg color to product if price is different
-function updateSingleUserProductDisplay(){
-
+function updateSingleUserProductDisplay(sId, sTitle, sDescription, sImgSrc, sPrice){
+    var currentElement = $("#wdw-display").children('div[data-stockId="'+sId+'"]').children(".thumbnail");
+    currentElement.children(".caption").children("h3").text(sTitle);
+    currentElement.children(".caption").children(".description").text(sDescription);
+    currentElement.children("img").attr("src", sImgSrc);
+    var iCurrentPrice = Number(currentElement.children(".caption").children(".price").text());
+    var iNewPrice = Number(sPrice);
+    if(iNewPrice != iCurrentPrice){
+        if(iNewPrice > iCurrentPrice){
+            currentElement.addClass("positive");
+            currentElement.children(".caption").children(".price").html(iNewPrice + "<i class='fa fa-arrow-up'></i>");
+        } else {
+            currentElement.addClass("negative");
+            currentElement.children(".caption").children(".price").html(iNewPrice + "<i class='fa fa-arrow-down'></i>");
+        }
+    }
 }
 
-//Take id & variables as parameters
-//Get HTML user (public) template
-//Insert data into template
-//Append modified template HTML inside the display div
-function addSingleUserProductDisplay(){
-
+function addSingleUserProductDisplay(sId, sTitle, sDescription, sImgSrc, sPrice){
+    $.ajax({
+        "url":"server/getusertemplate.php",
+        "method":"post",
+        "cache":false
+    }).done( function(sData){
+        var sOutput = sData;
+        sOutput = sOutput.replace("{{id}}", sId);
+        sOutput = sOutput.replace("{{title}}", sTitle);
+        sOutput = sOutput.replace("{{description}}", sDescription);
+        sOutput = sOutput.replace("{{imgSrc}}", sImgSrc);
+        sOutput = sOutput.replace("{{price}}", sPrice);
+        $("#wdw-display").append(sOutput);
+    })
 }
 
