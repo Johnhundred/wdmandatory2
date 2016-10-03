@@ -3,7 +3,34 @@
 insertProductDataInAdminTemplate();
 
 $(document).on("click", ".fa-trash-o", function(){
-    deleteProductDataFromFile(this);
+    var oElement = this;
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this product!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    },
+    function(){
+        swal("Deleted!", "The product has been deleted.", "success");
+        deleteProductDataFromFile(oElement);
+    });
+});
+
+$(document).on("click", "#btnAddProduct", function(e){
+    e.preventDefault();
+    var sTitle = $("#txtProductTitle").val();
+    var sDescription = $("#txtProductDescription").val();
+    var sPrice = $("#txtProductPrice").val();
+    var sImage = $("#txtProductImage").val();
+
+    if(Number(sPrice)){
+        addProductDataToFile(sTitle, sDescription, sPrice, sImage);
+    } else {
+        alert("That price is not a number, please edit it to be a number.");
+    }
 });
 
 
@@ -30,8 +57,15 @@ function insertProductDataInAdminTemplate(){
 //Stringify object
 //AJAX stringified object to PHP file (server/addproduct.php?) to add it
 //On ajax done, use object to add the new product to display with addSingleAdminProductDisplay()
-function addProductDataToFile(){
-
+function addProductDataToFile(sTitle, sDescription, sPrice, sImage){
+    $.ajax({
+        "url":"server/addproduct.php",
+        "method":"post",
+        "cache":false,
+        "data": {"sTitle": sTitle, "sDescription": sDescription, "sPrice": sPrice, "sImage": sImage}
+    }).success( function(sData){
+        addSingleAdminProductDisplay(sData, sTitle, sDescription, sPrice, sImage);
+    })
 }
 
 //On edit event, fire function
@@ -81,8 +115,20 @@ function updateSingleAdminProductDisplay(){
 //Get template
 //Replace received parameters in template
 //Append modified template to the end of the display div
-function addSingleAdminProductDisplay(){
-    
+function addSingleAdminProductDisplay(sId, sTitle, sDescription, sPrice, sImageSrc){
+    $.ajax({
+        "url":"server/getadmintemplate.php",
+        "method":"post",
+        "cache":false
+    }).done( function(sData){
+        var sOutput = sData;
+        sOutput = sOutput.replace("{{id}}", sId);
+        sOutput = sOutput.replace("{{title}}", sTitle);
+        sOutput = sOutput.replace("{{description}}", sDescription);
+        sOutput = sOutput.replace("{{imgSrc}}", sImageSrc);
+        sOutput = sOutput.replace("{{price}}", sPrice);
+        $("#wdw-admin-display").append(sOutput);
+    })
 }
 
 //Find product in display via passed parameter id

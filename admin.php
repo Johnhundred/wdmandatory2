@@ -70,7 +70,23 @@
             <button>LOGOUT</button>
         </form>
 
-        <div id="wdw-admin-display">
+        <div class="container">
+
+            <div id="wdw-admin-cp">
+
+                <form>
+                    <input type="text" id="txtProductTitle" placeholder="Product title">
+                    <input type="text" id="txtProductDescription" placeholder="Product description">
+                    <input type="text" id="txtProductPrice" placeholder="Product price">
+                    <input type="text" id="txtProductImage" placeholder="Product image URL">
+                    <button id="btnAddProduct">Add Product</button>
+                </form>
+
+            </div>
+
+            <div id="wdw-admin-display">
+
+            </div>
 
         </div>
 

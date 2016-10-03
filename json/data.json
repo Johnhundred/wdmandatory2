@@ -1,23 +1,23 @@
 [
-  {
-    "title": "Stock 1",
-    "description": "This is a test.",
-    "price": "20",
-    "id": "1",
-    "imgSrc": "no.jpg"
-  },
-  {
-    "title": "Stock 2",
-    "description": "This is a test.",
-    "price": "30",
-    "id": "2",
-    "imgSrc": "no.jpg"
-  },
-  {
-    "title": "Stock 3",
-    "description": "This is a test.",
-    "price": "40",
-    "id": "3",
-    "imgSrc": "no.jpg"
-  }
+    {
+        "title": "Stock 1",
+        "description": "This is a test.",
+        "price": "20",
+        "id": "1",
+        "imgSrc": "no.jpg"
+    },
+    {
+        "title": "Stock 2",
+        "description": "This is a test.",
+        "price": "30",
+        "id": "2",
+        "imgSrc": "no.jpg"
+    },
+    {
+        "title": "Stock 3",
+        "description": "This is a test.",
+        "price": "40",
+        "id": "3",
+        "imgSrc": "no.jpg"
+    }
 ]
