@@ -7,10 +7,10 @@
         "imgSrc": "no.jpg"
     },
     {
+        "id": "2",
         "title": "Stock 2",
         "description": "This is a test.",
         "price": "30",
-        "id": "2",
         "imgSrc": "no.jpg"
     },
     {

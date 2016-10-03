@@ -33,15 +33,22 @@ $(document).on("click", "#btnAddProduct", function(e){
     }
 });
 
+$(document).on("click", ".fa-pencil", function(){
+    displayEditableProductData(this);
+});
+
+$(document).on("click", ".modal-close", function(){
+    $("#myModal").hide();
+});
+
+$(document).on("click", ".modal-save", function(){
+    saveEditedProductData(this);
+});
+
 
 
 /********************* CONTROL PANEL FUNCTIONALITY *********************/
 
-//Get data from global - getProductDataFromFile()
-//Get HTML admin template
-//Insert data into template
-//Add each modified template to a string
-//Pass string to updateAllAdminProductDisplay()
 function insertProductDataInAdminTemplate(){
     $.ajax({
         "url":"server/populateadmintemplate.php",
@@ -52,11 +59,6 @@ function insertProductDataInAdminTemplate(){
     })
 }
 
-//Take parameters from input elements
-//Create object with parameter data
-//Stringify object
-//AJAX stringified object to PHP file (server/addproduct.php?) to add it
-//On ajax done, use object to add the new product to display with addSingleAdminProductDisplay()
 function addProductDataToFile(sTitle, sDescription, sPrice, sImage){
     $.ajax({
         "url":"server/addproduct.php",
@@ -68,24 +70,39 @@ function addProductDataToFile(sTitle, sDescription, sPrice, sImage){
     })
 }
 
-//On edit event, fire function
-//display modal/swal popup with data from object passed by event
-function displayEditableProductData(){
+function displayEditableProductData(oElement){
+    var oParent = $(oElement).parent().parent();
+    var sId = oParent.children(".caption").children(".fa-pencil").attr("data-editid");
+    var sImgSrc = oParent.children("img").attr("src");
+    var sTitle = oParent.children(".caption").children("h3").text();
+    var sDescription = oParent.children(".caption").children(".description").text();
+    var sPrice = oParent.children(".caption").children(".price").text();
 
+    var sDisplay = "<table class='table table-hover'><thead><tr><th>Title</th><th>Description</th><th>Price</th><th>Image URL</th></tr></thead><tbody><tr data-tableId='"+sId+"'><td><input type='text' value='"+sTitle+"'></td><td><input type='text' value='"+sDescription+"'></td><td><input type='text' value='"+sPrice+"'></td><td><input type='text' value='"+sImgSrc+"'></td></tr></tbody></table>";
+
+    $("#wdw-edit-data").html(sDisplay);
+    $("#myModal").show();
 }
 
-//On save event, fire function
-//Create object with data from input fields
-//stringify object
-//AJAX stringified object to PHP file (server/editproduct.php?) to edit
-//On ajax done, use object to update display - updateSingleAdminProductDisplay()
-function saveEditedProductData(){
-    
+function saveEditedProductData(oElement){
+    var oParent = $(oElement).parent().parent().children("#wdw-edit-data").children("table").children("tbody").children("tr");
+    var jData = {};
+    jData.id = oParent.attr("data-tableId");
+    jData.title = oParent.children("td:nth-of-type(1)").children("input").val();
+    jData.description = oParent.children("td:nth-of-type(2)").children("input").val();
+    jData.price = oParent.children("td:nth-of-type(3)").children("input").val();
+    jData.imgSrc = oParent.children("td:nth-of-type(4)").children("input").val();
+    var sData = JSON.stringify(jData);
+    $.ajax({
+        "url":"server/editproduct.php",
+        "method":"post",
+        "cache":false,
+        "data": {"sData": sData}
+    }).success( function(){
+        updateSingleAdminProductDisplay(jData.id, jData.title, jData.description, jData.price, jData.imgSrc);
+    })
 }
 
-//On event, fire function
-//Take id, AJAX to PHP file (server/deleteproduct.php?) to delete
-//On ajax done, remove from display with id - removeSingleAdminProductDisplay()
 function deleteProductDataFromFile(oElement){
     var sId = $(oElement).attr("data-deleteid");
     $.ajax({
@@ -99,22 +116,18 @@ function deleteProductDataFromFile(oElement){
 
 }
 
-//Empty display div, insert passed string instead
 function updateAllAdminProductDisplay(sData){
     $("#wdw-admin-display").empty().html(sData);
 }
 
-//Take id & variables to be changed as parameters
-//If a parameter is not specified, use current (from display)
-//Find single display by id
-//modify values to received parameters
-function updateSingleAdminProductDisplay(){
-
+function updateSingleAdminProductDisplay(sId, sTitle, sDescription, sPrice, sImageSrc){
+    var currentElement = $("#wdw-admin-display").children('div[data-stockId="'+sId+'"]').children(".thumbnail");
+    currentElement.children("img").attr("src", sImageSrc);
+    currentElement.children(".caption").children("h3").text(sTitle);
+    currentElement.children(".caption").children(".description").text(sDescription);
+    currentElement.children(".caption").children(".price").text(sPrice);
 }
 
-//Get template
-//Replace received parameters in template
-//Append modified template to the end of the display div
 function addSingleAdminProductDisplay(sId, sTitle, sDescription, sPrice, sImageSrc){
     $.ajax({
         "url":"server/getadmintemplate.php",
@@ -131,8 +144,6 @@ function addSingleAdminProductDisplay(sId, sTitle, sDescription, sPrice, sImageS
     })
 }
 
-//Find product in display via passed parameter id
-//Remove product from display
 function removeSingleAdminProductDisplay(sId){
     $("#wdw-admin-display").children('div[data-stockId="'+sId+'"]').remove();
 }

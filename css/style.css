@@ -22,3 +22,15 @@
 
 /********************* ADMIN STYLING *********************/
 
+.fa-trash-o, .fa-pencil {
+    cursor: pointer;
+}
+
+.modal-container {
+    max-width: 75vw;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+}
+
