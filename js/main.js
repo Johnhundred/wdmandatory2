@@ -12,8 +12,6 @@ setInterval(function(){
 }, 1000);
 
 function insertProductDataInUserTemplate(){
-    var sOutput = "";
-
     $.ajax({
         "url":"server/populateusertemplate.php",
         "method":"post",

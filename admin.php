@@ -70,6 +70,10 @@
             <button>LOGOUT</button>
         </form>
 
+        <div id="wdw-admin-display">
+
+        </div>
+
         <?php
 
 //            $aAdministrators = [];

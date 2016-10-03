@@ -1,5 +1,11 @@
 /********************* CONTROL PANEL EVENTS *********************/
 
+insertProductDataInAdminTemplate();
+
+$(document).on("click", ".fa-trash-o", function(){
+    deleteProductDataFromFile(this);
+});
+
 
 
 /********************* CONTROL PANEL FUNCTIONALITY *********************/
@@ -10,7 +16,13 @@
 //Add each modified template to a string
 //Pass string to updateAllAdminProductDisplay()
 function insertProductDataInAdminTemplate(){
-
+    $.ajax({
+        "url":"server/populateadmintemplate.php",
+        "method":"post",
+        "cache":false
+    }).done( function(sData){
+        updateAllAdminProductDisplay(sData);
+    })
 }
 
 //Take parameters from input elements
@@ -40,13 +52,22 @@ function saveEditedProductData(){
 //On event, fire function
 //Take id, AJAX to PHP file (server/deleteproduct.php?) to delete
 //On ajax done, remove from display with id - removeSingleAdminProductDisplay()
-function deleteProductDataFromFile(){
+function deleteProductDataFromFile(oElement){
+    var sId = $(oElement).attr("data-deleteid");
+    $.ajax({
+        "url":"server/deleteproduct.php",
+        "method":"post",
+        "cache":false,
+        "data": {"deleteId": sId}
+    }).success( function(sData){
+        removeSingleAdminProductDisplay(sId);
+    })
 
 }
 
 //Empty display div, insert passed string instead
-function updateAllAdminProductDisplay(){
-
+function updateAllAdminProductDisplay(sData){
+    $("#wdw-admin-display").empty().html(sData);
 }
 
 //Take id & variables to be changed as parameters
@@ -66,7 +87,7 @@ function addSingleAdminProductDisplay(){
 
 //Find product in display via passed parameter id
 //Remove product from display
-function removeSingleAdminProductDisplay(){
-
+function removeSingleAdminProductDisplay(sId){
+    $("#wdw-admin-display").children('div[data-stockId="'+sId+'"]').remove();
 }
 
