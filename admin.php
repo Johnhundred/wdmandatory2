@@ -22,11 +22,11 @@
 	        } else {
 	            $_SESSION['admin'] = 0;
 	            unset($_SESSION['login']);
-	            header('location: index.php');
+	            header('location: login.php');
 	        }
 	    }
 	} else {
-	    header('location: index.php');
+	    header('location: login.php');
 	}
 
 	if( isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
@@ -64,23 +64,29 @@
     </head>
     <body>
 
-        <p>Admin page.</p>
-
-        <form action="server/logout.php">
-            <button>LOGOUT</button>
-        </form>
-
         <div class="container">
 
             <div id="wdw-admin-cp">
 
-                <form>
-                    <input type="text" id="txtProductTitle" placeholder="Product title">
-                    <input type="text" id="txtProductDescription" placeholder="Product description">
-                    <input type="text" id="txtProductPrice" placeholder="Product price">
-                    <input type="text" id="txtProductImage" placeholder="Product image URL">
-                    <button id="btnAddProduct">Add Product</button>
-                </form>
+                <div id="lblAddProduct">
+
+                    <form>
+                        <input type="text" id="txtProductTitle" placeholder="Product title">
+                        <input type="text" id="txtProductDescription" placeholder="Product description">
+                        <input type="text" id="txtProductPrice" placeholder="Product price">
+                        <input type="text" id="txtProductImage" placeholder="Product image URL">
+                        <button id="btnAddProduct">Add Product</button>
+                    </form>
+
+                </div>
+
+                <div id="lblAdminLogout">
+
+                    <form action="server/logout.php">
+                        <button>LOGOUT</button>
+                    </form>
+
+                </div>
 
             </div>
 
@@ -89,34 +95,6 @@
             </div>
 
         </div>
-
-        <?php
-
-//            $aAdministrators = [];
-//
-//            $oAdmin = new stdClass();
-//            $oAdmin->email = "a@a.com";
-//            $oAdmin->name = "Admin1";
-//            $oAdmin->password = base64_encode("test1");
-//            $oAdmin->id = uniqid();
-//
-//            array_push($aAdministrators, $oAdmin);
-//
-//            $oAdmin = new stdClass();
-//            $oAdmin->email = "b@b.com";
-//            $oAdmin->name = "Admin2";
-//            $oAdmin->password = base64_encode("test2");
-//            $oAdmin->id = uniqid();
-//
-//            array_push($aAdministrators, $oAdmin);
-//
-//            $output = json_encode($aAdministrators, JSON_PRETTY_PRINT);
-//
-//            file_put_contents("json/administrators.json", $output);
-
-
-
-        ?>
 
         <div id="myModal" class="modal" role="dialog">
           <div class="modal-container">

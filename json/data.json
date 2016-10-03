@@ -4,20 +4,20 @@
         "description": "This is a test.",
         "price": "20",
         "id": "1",
-        "imgSrc": "no.jpg"
+        "imgSrc": "http://a4.mzstatic.com/us/r30/Purple6/v4/45/99/be/4599beb5-9f5b-820b-c0b4-7936727f6949/icon128-2x.png"
     },
     {
         "id": "2",
         "title": "Stock 2",
         "description": "This is a test.",
-        "price": "30",
-        "imgSrc": "no.jpg"
+        "price": "35",
+        "imgSrc": "http://a4.mzstatic.com/us/r30/Purple6/v4/45/99/be/4599beb5-9f5b-820b-c0b4-7936727f6949/icon128-2x.png"
     },
     {
         "title": "Stock 3",
         "description": "This is a test.",
         "price": "40",
         "id": "3",
-        "imgSrc": "no.jpg"
+        "imgSrc": "http://a4.mzstatic.com/us/r30/Purple6/v4/45/99/be/4599beb5-9f5b-820b-c0b4-7936727f6949/icon128-2x.png"
     }
 ]

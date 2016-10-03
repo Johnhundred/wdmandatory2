@@ -74,10 +74,10 @@ function updateSingleUserProductDisplay(sId, sTitle, sDescription, sImgSrc, sPri
     var iNewPrice = Number(sPrice);
     if(iNewPrice != iCurrentPrice){
         if(iNewPrice > iCurrentPrice){
-            currentElement.addClass("positive");
+            currentElement.removeClass("negative").addClass("positive");
             currentElement.children(".caption").children(".price").html(iNewPrice + "<i class='fa fa-arrow-up'></i>");
         } else {
-            currentElement.addClass("negative");
+            currentElement.removeClass("positive").addClass("negative");
             currentElement.children(".caption").children(".price").html(iNewPrice + "<i class='fa fa-arrow-down'></i>");
         }
     }
