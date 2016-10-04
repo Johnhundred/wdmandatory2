@@ -64,10 +64,10 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="container-fluid">
 
             <div id="wdw-admin-cp">
-
+                
                 <div id="lblAddProduct">
 
                     <form>
@@ -88,9 +88,11 @@
 
                 </div>
 
+
+
             </div>
 
-            <div id="wdw-admin-display">
+            <div id="wdw-admin-display" class="container">
 
             </div>
 

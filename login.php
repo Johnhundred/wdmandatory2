@@ -40,14 +40,14 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container login-container">
 
     <div id="wdw-login">
         <form method="post" action="login.php">
-            <input type="text" name="txtUserEmail" placeholder="email">
-            <input type="text" name="txtUserPassword" placeholder="password">
+            <input type="text" name="txtUserEmail" placeholder="email" id="userEmail">
+            <input type="password" name="txtUserPassword" placeholder="password">
             <input type="hidden" name="login" value="true">
-            <button>LOGIN</button>
+            <button id="btnLogin">LOGIN</button>
         </form>
     </div>
 

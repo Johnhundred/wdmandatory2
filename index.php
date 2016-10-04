@@ -28,13 +28,13 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div id="lblLogin">
-            <a href="login.php">Login</a>
+            Administrator? <a href="login.php">Login</a>
         </div>
 
-        <div id="wdw-display">
+        <div id="wdw-display" class="container">
 
         </div>
 
