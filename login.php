@@ -1,7 +1,7 @@
 <?php
     session_start();
     if( isset( $_POST['login'] ) ){
-        $sPass = base64_encode(base64_encode($_POST['txtUserPassword']));
+        $sPass = $_POST['txtUserPassword'];
         $_SESSION['login'] = "true";
         $_SESSION['email'] = $_POST['txtUserEmail'];
         $_SESSION['password'] = $sPass;

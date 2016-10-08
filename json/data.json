@@ -2,8 +2,13 @@
     {
         "id": "1",
         "title": "Stock 1",
+<<<<<<< HEAD
         "description": "This is a test for the description field.",
         "price": "1800",
+=======
+        "description": "This is a test.",
+        "price": "100",
+>>>>>>> 352785f25638059afefd0797d12a43662cc8c903
         "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png"
     },
     {

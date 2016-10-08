@@ -8,7 +8,7 @@
         //if variables are the same, logged in
         //if not, send back to index
 
-	    $sUserPass = base64_decode($_SESSION['password']);
+	    $sUserPass = $_SESSION['password'];
 	    $sUserEmail = $_SESSION['email'];
 	    $sAdminData = file_get_contents("json/administrators.json");
 	    $ajAdminData = json_decode($sAdminData);

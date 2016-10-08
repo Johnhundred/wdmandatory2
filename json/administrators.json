@@ -2,13 +2,13 @@
     {
         "email": "a@a.com",
         "name": "Admin1",
-        "password": "dGVzdDE=",
+        "password": "test1",
         "id": "57f13d255640f"
     },
     {
         "email": "b@b.com",
         "name": "Admin2",
-        "password": "dGVzdDI=",
+        "password": "test2",
         "id": "57f13d2556419"
     }
 ]
