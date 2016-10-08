@@ -2,29 +2,43 @@
     {
         "id": "1",
         "title": "Stock 1",
-        "description": "This is a test.",
-        "price": "1200",
+        "description": "This is a test for the description field.",
+        "price": "1800",
         "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png"
     },
     {
-        "id": "2",
-        "title": "Stock 2",
-        "description": "This is a test.",
-        "price": "35",
-        "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png"
+        "title": "Honda",
+        "description": "This is a car brand",
+        "price": "2500",
+        "imgSrc": "http:\/\/www.car-brand-names.com\/wp-content\/uploads\/2015\/05\/Honda-logo.png",
+        "id": "57f4225693a84"
     },
     {
-        "title": "Stock 3",
-        "description": "This is a test.",
-        "price": "40",
-        "id": "3",
-        "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png"
+        "title": "Tesla",
+        "description": "Car brand yet they have smarphones as well now.",
+        "price": "3500",
+        "imgSrc": "http:\/\/thenewswheel.com\/wp-content\/uploads\/2015\/10\/Tesla-T-logo.jpg",
+        "id": "57f422d401103"
     },
     {
-        "title": "Stock 3",
-        "description": "This is another test",
-        "price": "55",
-        "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png",
-        "id": "57f278c515a24"
+        "title": "Samsung",
+        "description": "Exploding phones, nice TVs",
+        "price": "1500",
+        "imgSrc": "http:\/\/www.samsung.com\/common\/img\/logo-square-letter.png",
+        "id": "57f4231374a39"
+    },
+    {
+        "title": "Apple",
+        "description": "Apple? Nej tak. Too much for too little.",
+        "price": "1000",
+        "imgSrc": "https:\/\/image.freepik.com\/free-icon\/apple-logo_318-40184.png",
+        "id": "57f423551370d"
+    },
+    {
+        "title": "KEA",
+        "description": "Copenhagen School of Design and Technology",
+        "price": "500",
+        "imgSrc": "http:\/\/www.kea.dk\/fileadmin\/user_upload\/Presse\/logoer\/kea_EN_logo_BLK.jpg",
+        "id": "57f423a023974"
     }
 ]
