@@ -35,10 +35,17 @@
         "id": "57f423551370d"
     },
     {
-        "title": "KEA",
-        "description": "Copenhagen School of Design and Technology",
-        "price": "500",
-        "imgSrc": "http:\/\/www.kea.dk\/fileadmin\/user_upload\/Presse\/logoer\/kea_EN_logo_BLK.jpg",
-        "id": "57f423a023974"
+        "title": "Test1",
+        "description": "This is a long description to test how it would actually work out with longer descriptions. I really do hope it will end out well. I should have looked for some lorem ipsum. Damn it! Lorem ipsum.",
+        "price": "2500",
+        "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png",
+        "id": "57fb7b56081f6"
+    },
+    {
+        "title": "Test2",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida eleifend tellus, pellentesque vestibulum lectus. Proin enim lacus, mattis quis tempus quis, finibus ac nisi. Sed quis pharetra nunc. Mauris lobortis aliquam porttitor. Ut sed malesuada sapien. Nulla vitae purus justo. Aliquam sit amet felis non sapien sodales imperdiet. In sagittis at diam ac accumsan. Aenean suscipit quam lorem, eget sagittis tellus facilisis non. Pellentesque auctor nibh sem, nec dignissim dolor malesuada non.",
+        "price": "8500",
+        "imgSrc": "http:\/\/a4.mzstatic.com\/us\/r30\/Purple6\/v4\/45\/99\/be\/4599beb5-9f5b-820b-c0b4-7936727f6949\/icon128-2x.png",
+        "id": "57fb7b8d5bbaa"
     }
 ]
