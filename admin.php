@@ -8,6 +8,7 @@
         //if variables are the same, logged in
         //if not, send back to index
 
+        $bPermission = false;
 	    $sUserPass = $_SESSION['password'];
 	    $sUserEmail = $_SESSION['email'];
 	    $sAdminData = file_get_contents("json/administrators.json");
@@ -18,12 +19,16 @@
 	    for($i = 0; $i < $iArrayLength; $i++){
 	        if($ajAdminData[$i]->password == $sUserPass && $ajAdminData[$i]->email == $sUserEmail){
 	            $_SESSION['admin'] = 1;
+	            $bPermission = true;
 	            break;
 	        } else {
 	            $_SESSION['admin'] = 0;
-	            unset($_SESSION['login']);
-	            header('location: login.php');
 	        }
+	    }
+
+	    if($bPermission == false){
+            unset($_SESSION['login']);
+            header('location: login.php');
 	    }
 	} else {
 	    header('location: login.php');
