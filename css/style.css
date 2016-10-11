@@ -26,11 +26,11 @@ body {
 }
 
 .positive {
-    background-color: #A5DC86;
+    background-color: #A5DC86 !important;
 }
 
 .negative {
-    background-color: #F27474;
+    background-color: #F27474 !important;
 }
 
 #lblLogin {
@@ -50,6 +50,11 @@ body {
 
 #wdw-display {
     padding-top: 30px;
+}
+
+.thumbnail {
+    background-color: transparent !important;
+    border-color: transparent !important;
 }
 
 /********************* LOG IN STYLING *********************/
