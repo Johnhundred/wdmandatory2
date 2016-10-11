@@ -45,7 +45,9 @@ $(document).on("click", ".modal-save", function(){
     saveEditedProductData(this);
 });
 
-
+setInterval(function(){
+    checkForAdminProductDataChanges();
+}, 1000);
 
 /********************* CONTROL PANEL FUNCTIONALITY *********************/
 
@@ -146,5 +148,44 @@ function addSingleAdminProductDisplay(sId, sTitle, sDescription, sPrice, sImageS
 
 function removeSingleAdminProductDisplay(sId){
     $("#wdw-admin-display").children('div[data-stockId="'+sId+'"]').remove();
+}
+
+function checkForAdminProductDataChanges(){
+    $.ajax({
+        "url":"server/getdata.php",
+        "method":"post",
+        "cache":false
+    }).done( function(sData){
+        var ajData = JSON.parse(sData);
+        for(var i = 0; i < ajData.length; i++){
+            var sId = ajData[i].id;
+            var currentElement, currentTitle, currentDescription, currentImgSrc, currentPrice;
+            if($("#wdw-admin-display").children('div[data-stockId="'+sId+'"]').length > 0){
+                currentElement = $("#wdw-admin-display").children('div[data-stockId="'+sId+'"]').children(".thumbnail");
+                currentTitle = currentElement.children(".caption").children("h3").text();
+                currentDescription = currentElement.children(".caption").children(".description").text();
+                currentPrice = currentElement.children(".caption").children(".price").text();
+                currentImgSrc = currentElement.children("img").attr("src");
+            } else {
+                addSingleAdminProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].price, ajData[i].imgSrc);
+            }
+
+            if(currentTitle != ajData[i].title){
+                updateSingleAdminProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].price, ajData[i].imgSrc);
+                continue;
+            }
+            if(currentDescription != ajData[i].description){
+                updateSingleAdminProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].price, ajData[i].imgSrc);
+                continue;
+            }
+            if(currentPrice != ajData[i].price){
+                updateSingleAdminProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].price, ajData[i].imgSrc);
+                continue;
+            }
+            if(currentImgSrc != ajData[i].imgSrc){
+                updateSingleAdminProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].price, ajData[i].imgSrc);
+            }
+        }
+    })
 }
 

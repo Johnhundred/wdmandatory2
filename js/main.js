@@ -55,7 +55,6 @@ function checkForProductDataChanges(){
             }
             if(currentImgSrc != ajData[i].imgSrc){
                 updateSingleUserProductDisplay(sId, ajData[i].title, ajData[i].description, ajData[i].imgSrc, ajData[i].price);
-                continue;
             }
         }
     })
