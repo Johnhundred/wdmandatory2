@@ -27,6 +27,7 @@
 	    }
 
 	    if($bPermission == false){
+            unset($_SESSION['admin']);
             unset($_SESSION['login']);
             header('location: login.php');
 	    }
